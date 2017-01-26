@@ -133,6 +133,14 @@ describe RuboCop::ProcessedSource do
       first_line = processed_source.lines.first
       expect(first_line).to eq('# encoding: utf-8')
     end
+
+    context 'when the source has lines wrapped with "\"' do
+      let(:source) { "line1 \\\nline2" }
+
+      it 'combines the wrapped lines',focus:true do
+        expect(processed_source.lines).to eq(['line1 line2'])
+      end
+    end
   end
 
   describe '#[]' do

@@ -139,6 +139,7 @@ module RuboCop
         end
 
         def line_count_based_block_style?(node)
+          # require 'pry';binding.pry
           block_begin = node.loc.begin.source
 
           (block_length(node) > 0) ^ (block_begin == '{')

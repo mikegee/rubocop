@@ -29,6 +29,13 @@ describe RuboCop::Cop::Style::BlockDelimiters, :config do
                            '}, 1'])
       expect(cop.messages).to be_empty
     end
+
+    it 'accepts a single line that has been wrapped with "\"',focus:true do
+      inspect_source(cop, ['[].select { "Really Long" \\',
+                           '  }.each do |stuff|',
+                           'end'])
+      expect(cop.messages).to be_empty
+    end
   end
 
   context 'Semantic style' do

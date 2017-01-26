@@ -58,7 +58,13 @@ module RuboCop
         result = []
         all_lines.each_with_index do |line, ix|
           break if ix >= last_token_line && line == '__END__'
-          result << line
+          p line
+          if result[-1].to_s.end_with?('\\')
+            p :appending
+            result[-1] = result[-1][0..-2] + line
+          else
+            result << line
+          end
         end
         result
       end
